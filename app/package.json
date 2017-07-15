@@ -1,0 +1,13 @@
+{
+  "name": "node-playground",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Vincent Cohen <ikben@vincentcohen.nl>",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -L app/"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
