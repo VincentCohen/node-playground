@@ -1,32 +1,27 @@
 'use strict';
 
-const express = require('express');
-
-// Constants
 const PORT = 3000;
 const HOST = '0.0.0.0';
 
-// App
+const fs = require('fs');
+const join = require('path').join;
+const express = require('express');
 const app = express();
-app.get('/', (req, res) => {
-  res.send('NodeJs playground!');
+const models = join(__dirname, './models');
+
+var mongoose = require('mongoose');
+mongoose.createConnection('mongodb://localhost/app', function(){
+    useMongoClient: true
 });
 
-app.get('/invoices', (req, res) => {
-  res.send('invoices\n');
-});
 
-app.get('/invoices/{id}', (req, res) => {
-  res.send('single invoice\n');
-});
+// Load models
+fs.readdirSync(models)
+  .filter(file => ~file.search(/^[^\.].*\.js$/))
+  .forEach(file => require(join(models, file)));
 
-app.get('/invoices/{id}/items', (req, res) => {
-  res.send('invoice items listing\n');
-});
-
-app.get('/invoices/{id}/print', (req, res) => {
-  res.send('print a single invoice\n');
-});
+// Load routes
+require('./routes')(app);
 
 app.listen(PORT, HOST);
 
