@@ -8,17 +8,22 @@ const join = require('path').join;
 const express = require('express');
 const app = express();
 const models = join(__dirname, './models');
+const services = join(__dirname, './services');
 
 var mongoose = require('mongoose');
 mongoose.createConnection('mongodb://localhost/app', function(){
     useMongoClient: true
 });
 
+// Load files
+function load(src)
+{
+  fs.readdirSync(src)
+    .filter(file => ~file.search(/^[^\.].*\.js$/))
+    .forEach(file => require(join(src, file)));
+}
 
-// Load models
-fs.readdirSync(models)
-  .filter(file => ~file.search(/^[^\.].*\.js$/))
-  .forEach(file => require(join(models, file)));
+load(models);
 
 // Load routes
 require('./routes')(app);

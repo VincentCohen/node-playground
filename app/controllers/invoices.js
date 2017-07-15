@@ -1,9 +1,10 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const InvoiceService = require('../services/invoice.js');
 
 exports.index = function (req, res) {
-    // console.log (mongoose.model('Invoice'));
+    var foo = new InvoiceService();
 
     res.send('list\n');
 }
