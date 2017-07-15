@@ -12,4 +12,4 @@ ADD app/nodemon.json /src/nodemon.json
 
 EXPOSE 3000
 
-CMD npm start
+ENTRYPOINT ["npm", "start"]

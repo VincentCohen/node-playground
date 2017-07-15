@@ -1,5 +1,6 @@
 web:
   build: .
+  entrypoint: ['npm', 'run', 'dev']
   volumes:
     - "./app:/src/app"
   ports:
