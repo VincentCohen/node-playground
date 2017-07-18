@@ -1,10 +1,11 @@
-'use strict';
-
-const mongoose = require('mongoose');
 const InvoiceService = require('../services/invoice.js');
 
 exports.index = function (req, res) {
-    var foo = new InvoiceService();
+    const service = new InvoiceService();
+
+    const invoice = service.create();
+
+    console.log(invoice);
 
     res.send('list\n');
 }

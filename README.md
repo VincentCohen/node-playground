@@ -15,3 +15,5 @@ Docker exposes port `3000` which can be accesed on port `3030` via your `localho
 - `docker-compose build` 
 - `docker-compose up`
 - `view localhost:3030`
+
+You can access the database by running `docker exec` : `docker exec -it nodeplayground_db_1 mongo`

@@ -1,19 +1,17 @@
-'use strict';
-
 const PORT = 3000;
 const HOST = '0.0.0.0';
 
 const fs = require('fs');
 const join = require('path').join;
+
 const express = require('express');
+
 const app = express();
 const models = join(__dirname, './models');
-const services = join(__dirname, './services');
 
-var mongoose = require('mongoose');
-mongoose.createConnection('mongodb://localhost/app', function(){
-    useMongoClient: true
-});
+const mongoose = require('mongoose');
+
+mongoose.createConnection('mongodb://localhost/app', function() { useMongoClient: true });
 
 // Load files
 function load(src)
