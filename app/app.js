@@ -9,9 +9,13 @@ const express = require('express');
 const app = express();
 const models = join(__dirname, './models');
 
+// Set up database connection
 const mongoose = require('mongoose');
 
-mongoose.createConnection('mongodb://localhost/app', function() { useMongoClient: true });
+mongoose.connect('mongodb://db/app' , {useMongoClient: true});
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Load files
 function load(src)

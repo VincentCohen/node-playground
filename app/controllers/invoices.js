@@ -5,8 +5,6 @@ exports.index = function (req, res) {
 
     const invoice = service.create();
 
-    console.log(invoice);
-
     res.send('list\n');
 }
 

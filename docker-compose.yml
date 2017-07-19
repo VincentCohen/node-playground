@@ -1,11 +1,17 @@
-web:
-  build: .
-  entrypoint: ['npm', 'run', 'dev']
-  volumes:
-    - "./app:/src/app"
-  ports:
-    - "3030:3000"
-db:
-  image: mongo:latest
-  ports:
-    - "27017:27017"
+version: '3'
+services:
+  web:
+    build: .
+    entrypoint: ['npm', 'run', 'dev']
+    volumes:
+      - "./app:/src/app"
+    ports:
+      - "3030:3000"
+    depends_on:
+      - db
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - "./data:/data/db"

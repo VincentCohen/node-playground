@@ -11,10 +11,23 @@ module.exports = class InvoiceService {
 
     create() {
 
-        var invoice = new InvoiceModel();
+        console.log('--create--');
 
-        invoice.save(function (err,a,b) {
-            if (err) model_errors(err);
+        for (let i = 0; i < 12; i++) {
+            var invoice = new InvoiceModel({total_excl: 1 + i, total_incl: i +  2});
+
+            var saved = invoice.save(function (err,a,b) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+
+            console.log(`created invoice ${invoice.id}`);
+        } 
+
+        InvoiceModel.find().count(function(err, idx) {
+            console.log(`Theres ${idx} amount of items`);
         });
+        
    }
 }
