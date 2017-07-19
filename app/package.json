@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "express": "^4.13.3",
-    "mongoose": "^4.11.3"
+    "mongoose": "^4.11.3",
+    "body-parser": "^1.17.2"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

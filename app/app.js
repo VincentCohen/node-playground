@@ -5,8 +5,13 @@ const fs = require('fs');
 const join = require('path').join;
 
 const express = require('express');
+const bodyParser = require('body-parser');
+
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 const models = join(__dirname, './models');
 
 // Set up database connection

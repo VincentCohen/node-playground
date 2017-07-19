@@ -1,10 +1,6 @@
 const InvoiceService = require('../services/invoice.js');
 
 exports.index = function (req, res) {
-    const service = new InvoiceService();
-
-    const invoice = service.create();
-
     res.send('list\n');
 }
 
@@ -17,6 +13,11 @@ exports.items = function (req, res) {
 }
 
 exports.create = function (req, res) {
+    const service = new InvoiceService();
+
+    const invoice = service.create(req.body);
+
+
     res.send('create\n');
 }
 

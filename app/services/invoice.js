@@ -1,33 +1,26 @@
-'use strict'
-
 const InvoiceModel =  require('../models/invoice.js');
 
-var model_errors = require('../helpers/model_errors.js');
-
 module.exports = class InvoiceService {
-    constructor() {
-        // console.log('construct');
-    }
 
-    create() {
+    create(params) {
 
-        console.log('--create--');
-
-        for (let i = 0; i < 12; i++) {
-            var invoice = new InvoiceModel({total_excl: 1 + i, total_incl: i +  2});
-
-            var saved = invoice.save(function (err,a,b) {
-                if (err) {
-                    console.log(err);
-                }
-            });
-
-            console.log(`created invoice ${invoice.id}`);
-        } 
-
-        InvoiceModel.find().count(function(err, idx) {
-            console.log(`Theres ${idx} amount of items`);
+        const invoice = new InvoiceModel({
+            order: params.order,
+            customer: params.customer,
+            items: params.items,
+            total_incl: params.total_incl, // should be calculated based on items
+            total_excl: params.total_excl // should be calculated based on items
         });
+
+        return invoice.save(function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+
+        // InvoiceModel.find().count(function(err, idx) {
+        //     console.log(`Theres ${idx} amount of items`);
+        // });
         
    }
 }
