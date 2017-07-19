@@ -1,30 +1,55 @@
 const InvoiceService = require('../services/invoice.js');
 
-exports.index = function (req, res) {
-    res.send('list\n');
+const service = new InvoiceService();
+
+/**
+ * List all invoices
+ */
+exports.index = (req, res) => {
+
+    service.findAll().then( (invoices) => {
+        res.send(invoices);
+    });
 }
 
-exports.show = function (req, res) {
+/**
+ * Show specific invoice
+ */
+exports.show = (req, res) => {
   res.send('invoices\n');
 }
 
-exports.items = function (req, res) {
+/**
+ * Show all items in an invoice
+ */
+exports.items = (req, res) => {
   res.send('items\n');
 }
 
-exports.create = function (req, res) {
-    const service = new InvoiceService();
-
-    const invoice = service.create(req.body);
-
-
-    res.send('create\n');
+/**
+ * Create a new invoice
+ */
+exports.create = (req, res) => {
+    try {
+        const invoice = service.create(req.body);
+        
+        res.send(invoice);
+    } catch (e) {
+        res.status(422);
+        res.send(e);
+    }
 }
 
-exports.delete = function (req, res) {
+/**
+ * Delete an invoice
+ */
+exports.delete = (req, res) => {
     res.send('delete\n');
 }
 
-exports.print = function (req, res) {
+/**
+ * Print an invoice to PDF 
+ */
+exports.print = (req, res) => {
     res.send('print\n');
 }

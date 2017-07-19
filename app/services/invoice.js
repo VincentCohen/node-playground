@@ -2,6 +2,12 @@ const InvoiceModel =  require('../models/invoice.js');
 
 module.exports = class InvoiceService {
 
+    findAll() {
+        return InvoiceModel.find()
+        .then( (items) => { return items;})
+        .catch( (err) => { console.log(err) });
+    }
+
     create(params) {
 
         const invoice = new InvoiceModel({
@@ -12,15 +18,10 @@ module.exports = class InvoiceService {
             total_excl: params.total_excl // should be calculated based on items
         });
 
-        return invoice.save(function (err) {
-            if (err) {
-                console.log(err);
-            }
+        invoice.save( (err) => {
+            if (err) throw err;
         });
 
-        // InvoiceModel.find().count(function(err, idx) {
-        //     console.log(`Theres ${idx} amount of items`);
-        // });
-        
+        return invoice        
    }
 }

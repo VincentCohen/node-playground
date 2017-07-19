@@ -17,6 +17,8 @@ const models = join(__dirname, './models');
 // Set up database connection
 const mongoose = require('mongoose');
 
+mongoose.Promise = require('bluebird');
+
 mongoose.connect('mongodb://db/app' , {useMongoClient: true});
 const db = mongoose.connection;
 
